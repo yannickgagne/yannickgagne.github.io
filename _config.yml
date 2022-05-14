@@ -5,6 +5,8 @@
 
 # --- Required options --- #
 
+environment: production
+
 # Name of website
 title: Maker's Inn
 
