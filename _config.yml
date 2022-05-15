@@ -41,7 +41,7 @@ round-avatar: true
 # Select the social network links that you want to show in the footer.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
-  email: "none[at]none.com"
+  email: "yannickg@gmail.com"
   rss: true  # remove this line if you don't want to show an RSS link at the bottom
   facebook: yannickgagne
   github: yannickgagne
@@ -49,7 +49,7 @@ social-network-links:
 # patreon: DeanAttali
 # youtube: c/daattali
 #  medium: yourname
-#  reddit: yourname
+  reddit: berserk6996
 #  linkedin: daattali
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
@@ -166,7 +166,7 @@ gtag: "G-2QV31BFE9B"
 #fb_comment_id: ""
 
 # To use CommentBox, sign up for a Project ID on https://commentbox.io
-#commentbox: "" # Project ID, e.g. "5694267682979840-proj"
+commentbox: "5730213438685184-proj" # Project ID, e.g. "5694267682979840-proj"
 
 # To use Utterances comments: (0) uncomment the following section, (1) fill in
 # "repository" (make sure the repository is public), (2) Enable Issues in your repository,
