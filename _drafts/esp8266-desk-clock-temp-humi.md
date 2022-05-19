@@ -5,6 +5,8 @@ subtitle: NTP syncing and temperature/humidity display
 gh-repo: yannickgagne/AmbientBug
 tags: [esp8266]
 comments: true
+cover-img:
+  - "/assets/img/blog/esp32-desk-clock-header.jpg" : ""
 ---
 
 In this simple tutorial I will show you how I made a little desk clock based on the esp8266 MCU with MicroPython. The project includes include the following features :
@@ -22,7 +24,9 @@ In this simple tutorial I will show you how I made a little desk clock based on 
 
 ## **Connections**
 
-![Fritzing](/assets/img/ambientbug.png){: .mx-auto.d-block :}
+![Fritzing](/assets/img/blog/esp32-desk-clock-fritzing.png){: .mx-auto.d-block :}
+
+![Real thing](/assets/img/blog/esp32-desk-clock-connections-thumb.jpg){: .mx-auto.d-block :}
 
 ## **Code**
 
@@ -193,6 +197,8 @@ def sync_localtime(woff=-5,soff=-4):
 {% endhighlight %}
 
 I printed a small enclosure and power the device with a simple 5V wall adapter.
+
+[>> Complete code available on GitHub <<](https://github.com/yannickgagne/AmbientBug)
 
 I hope this can help someone, feel free to ask questions or comments down below!
 
