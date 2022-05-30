@@ -5,8 +5,8 @@ subtitle: NTP syncing and temperature/humidity display
 gh-repo: yannickgagne/AmbientBug
 tags: [esp8266]
 comments: true
-cover-img:
-  - "/assets/img/blog/esp32-desk-clock-header.jpg" : ""
+thumbnail-img: /assets/img/blog/esp32-desk-clock-thumb.jpg
+cover-img: /assets/img/blog/esp32-desk-clock-header.jpg
 ---
 
 In this simple tutorial I will show you how I made a little desk clock based on the esp8266 MCU with MicroPython. The project includes include the following features :
