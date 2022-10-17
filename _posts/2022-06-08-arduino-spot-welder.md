@@ -16,7 +16,7 @@ This kind of spot welder is super simple, the idea is to have the Arduino contro
 In this first part, we will cover the wiring and code to control the timing of the relay.
 
 ## **Parts**
-- Arduino Nano (any Arduino will do)
+- [Arduino Nano](https://amzn.to/3eAUiVA) (any Arduino will do)
 - SSD1306 OLED display (I2C)
 - SSR Relay
 - Potentiometer
