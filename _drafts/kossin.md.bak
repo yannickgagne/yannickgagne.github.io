@@ -8,17 +8,22 @@ thumbnail-img: /assets/img/blog/xxx-thumb.jpg
 cover-img: /assets/img/blog/xxx-header.jpg
 ---
 
-In this simple tutorial I will show you how I transformed my normal bathroom door into a smart bathroom door to help with congestion :
+In this simple tutorial I will show you how I made a little desk clock based on the esp8266 MCU with MicroPython. The project includes include the following features :
+- ESPHome framework
+- Magnetic door sensor (Reed switch)
+- Piezo buzzer
+- Neopixel LED bar
 
 ## **Parts**
-- [ESPHome framework](https://esphome.io/)
 - [ESP8266](https://amzn.to/3T9qgra) (I use an [Adafruit HUZZAH ESP8266](https://www.adafruit.com/product/2471))
 - [Active piezo buzzer](https://amzn.to/3S7Rb5k)
 - [Neopixel LED bar](https://amzn.to/3yLRCLY)
 - [Magnetic door sensor](https://amzn.to/3D4bRXD)
 - 3D printed enclosure (optional)
 
-## **Pictures**
+## **Connections**
+
+![Fritzing](/assets/img/blog/xxx-fritzing.png){: .mx-auto.d-block :}
 
 ![Real thing](/assets/img/blog/xxx-connections-thumb.jpg){: .mx-auto.d-block :}
 
