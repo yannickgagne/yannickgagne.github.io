@@ -4,8 +4,8 @@ title: ESPHome Bathroom Monitor
 subtitle: Home automation to help with bathroom congestion
 tags: [esp8266, esphome, homeassistant]
 comments: true
-thumbnail-img: /assets/img/blog/xxx-thumb.jpg
-cover-img: /assets/img/blog/xxx-header.jpg
+thumbnail-img: /assets/img/blog/smart-toilet-thumb.jpg
+cover-img: /assets/img/blog/smart-toilet-header.jpg
 ---
 
 In this simple tutorial I will show you how I transformed my normal bathroom door into a smart bathroom door to help with congestion :
@@ -20,7 +20,7 @@ In this simple tutorial I will show you how I transformed my normal bathroom doo
 
 ## **Pictures**
 
-![Real thing](/assets/img/blog/xxx-connections-thumb.jpg){: .mx-auto.d-block :}
+![1st installation picture](/assets/img/blog/smart-toilet-install.jpg){: .mx-auto.d-block :}
 
 ## **Context**
 
