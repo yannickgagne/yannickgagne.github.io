@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ESPHome Bathroom Monitor
+title: Bathroom Door Monitor with ESPHome
 subtitle: Home automation to help with bathroom congestion
 tags: [esp8266, esphome, homeassistant]
 comments: true
@@ -8,7 +8,7 @@ thumbnail-img: /assets/img/blog/smart-toilet-thumb.jpg
 cover-img: /assets/img/blog/smart-toilet-header.jpg
 ---
 
-In this simple tutorial I will show you how I transformed my normal bathroom door into a smart bathroom door to help with congestion :
+In this simple tutorial I will show you how I transformed my normal bathroom door into a smart bathroom door to help with congestion.
 
 ## **Parts**
 - [ESPHome framework](https://esphome.io/)
@@ -36,7 +36,7 @@ The MCU with [ESPHome](https://esphome.io/) can work on its own but combining it
 
 You'll see that the code is very basic with a couple of more complex snippets but ESPHome makes it really simple and the documentation on their site is really well made. Everything is declared in the YAML config file like little modules that can interact with each other.
 
-That first block in the YAML config is very simple, you just have to set the right MCU you are using and your wifi informations. It is also strngly suggested to have an OTA update password, if not anybody that has access to your local network can push a firmware update from a web browser. NTP time syncing is also strongly suggested since we want to see the real date and time for each door events.
+That first block in the YAML config is very simple, you just have to set the right MCU you are using and your wifi informations. It is also strongly suggested to have an OTA update password, if not anybody that has access to your local network can push a firmware update from a web browser. NTP time syncing is also strongly suggested since I want to see the real date and time for each door events.
 
 {% highlight yaml linenos %}
 esphome:
@@ -75,12 +75,12 @@ web_server:
     timezone: America/Toronto
 {% endhighlight %}
 
-So if we get back to the main idea, making that bathroom door smart, we wanted to have the following feature ;
+So let's get back to the main idea, making that bathroom door smart, I wanted to have the following features ;
 - View the door state remotely
 - View since when the door was closed
-- Warn the person in the bathroom that we are waiting
+- Warn the person in the bathroom that someone is waiting
 
-First we need a way to to tell the ESP if the door is opened or closed, for that we use a simple magnetic door sensor and we connect it the a GPIO pin. As you can see below, we define a binary sensor and we set the pin to 12. We also added a delay of 250ms to change between states to avoid reporting too fast to Home Assistant. We also name the sensor and set it's device class.
+First I needed a way to tell the ESP if the door is opened or closed, for that I used a simple magnetic door sensor and connected it to a GPIO pin. As you can see below, I defined a binary sensor and I set the pin to 12. I also added a delay of 250ms to change between states to avoid reporting too fast to Home Assistant. I also named the sensor and set its device class.
 
 {% highlight yaml linenos %}
 binary_sensor:
@@ -99,9 +99,9 @@ binary_sensor:
 
 Now the only thing remaining is being able to warn a bathroom user that is taking a bit too much time. For this I used an active piezo buzzer and some addressable RGB LEDs, with this I have an audio and visual warning.
 
-First thing I need is a PWM output pin to play a tone with the piezo buzzer. I selected pin 14, define it as 'esp8266_pwm' and set its id as 'rtttl_out'. Then I defined a RTTTL object that use the previously configured 'rtttl_out'.
+First thing I needed is a PWM output pin to play a tone with the piezo buzzer. I selected pin 14, defined it as 'esp8266_pwm' and set its id as 'rtttl_out'. Then I defined a RTTTL object that use the previously configured 'rtttl_out'.
 
-Right after this, I defined the warning LEDs. First we select 'neopixelbus' because this is what I had on hand, there's a lot of options in esphome so select what you prefer. I also need to tell esphome a couple details about the LEDs strip used, mine had 8 WS2812 LEDs on it and it's controlled by pin 5 of the ESP. You can also see that I defined a simple custom light effect in the 'effects' section.
+Right after this, I defined the warning LEDs. I selected 'neopixelbus' because this is what I had on hand, there's a lot of options in esphome so select what you prefer. I also need to tell esphome a couple details about the LEDs strip used, mine had 8 WS2812 LEDs on it and it's controlled by pin 5 of the ESP. You can also see that I defined a simple custom light effect in the 'effects' section.
 
 Now all I need is a software button to activate the buzzer and light. The button definition itself is pretty simple, all the magic happens in the 'on_press'event. You can see that I first call 'rtttl.play' with a strange looking string, that string is actually the different tones and timings to play instead of just playing a single tone. You can find a lot of those on the web. Then using lambda calls to turn on the LEDs and perform the effect I defined earlier, do that effect for a 10 seconds delay and turn off the LEDs.
 
