@@ -35,18 +35,148 @@ The basic idea is the following, we are always between 6 to 8 people in my home 
 
 So the solution was to use [ESPHome](https://esphome.io/) to make the bathroom door "smart" and combine that with [Home Assistant](https://www.home-assistant.io/) to make it easy to see the data from any computer or cellphone.
 
-The [ESPHome](https://esphome.io/) can work on it's own but combining with [Home Assistant](https://www.home-assistant.io/) makes it far more user-friendly.
+The MCU with [ESPHome](https://esphome.io/) can work on its own but combining it with [Home Assistant](https://www.home-assistant.io/) makes it far more user-friendly.
 
 ## **Code**
 
 You'll see that the code is very basic with a couple of more complex snippets but ESPHome makes it really simple and the documentation on their site is really well made. Everything is declared in the YAML config file like little modules that can interact with each other.
 
+That first block in the YAML config is very simple, you just have to set the right MCU you are using and your wifi informations. It is also strngly suggested to have an OTA update password, if not anybody that has access to your local network can push a firmware update from a web browser. NTP time syncing is also strongly suggested since we want to see the real date and time for each door events.
 
+{% highlight yaml linenos %}
+esphome:
+  name: wifitoilet
+  on_boot:
+    - light.turn_on: status_l
 
-{% highlight python linenos %}
+esp8266:
+  board: huzzah
 
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  password: ""
+
+ota:
+  password: "****************"
+
+wifi:
+  ssid: "CanIGetA_OhYeah"
+  password: "**************************"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Wifitoilet Fallback Hotspot"
+    password: "UMG9vSbYhkfu"
+    
+web_server:
+  port: 80
+  
+  time:
+  - platform: sntp
+    id: sntp_time
+    timezone: America/Toronto
 {% endhighlight %}
 
+So if we get back to the main idea, making that bathroom door smart, we wanted to have the following feature ;
+- View the door state remotely
+- View since when the door was closed
+- Warn the person in the bathroom that we are waiting
+
+First we need a way to to tell the ESP if the door is opened or closed, for that we use a simple magnetic door sensor and we connect it the a GPIO pin. As you can see below, we define a binary sensor and we set the pin to 12. We also added a delay of 250ms to change between states to avoid reporting too fast to Home Assistant. We also name the sensor and set it's device class.
+
+{% highlight yaml linenos %}
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: 12
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - delayed_on_off: 250ms
+    id: toilet_door_sensor
+    name: Toilet Door
+    device_class: door
+{% endhighlight %}
+
+Now the only thing remaining is being able to warn a bathroom user that is taking a bit too much time. For this I used an active piezo buzzer and some addressable RGB LEDs, with this I have an audio and visual warning.
+
+First thing I need is a PWM output pin to play a tone with the piezo buzzer. I selected pin 14, define it as 'esp8266_pwm' and set its id as 'rtttl_out'. Then I defined a RTTTL object that use the previously configured 'rtttl_out'.
+
+Right after this, I defined the warning LEDs. First we select 'neopixelbus' because this is what I had on hand, there's a lot of options in esphome so select what you prefer. I also need to tell esphome a couple details about the LEDs strip used, mine had 8 WS2812 LEDs on it and it's controlled by pin 5 of the ESP. You can also see that I defined a simple custom light effect in the 'effects' section.
+
+Now all I need is a software button to activate the buzzer and light. The button definition itself is pretty simple, all the magic happens in the 'on_press'event. You can see that I first call 'rtttl.play' with a strange looking string, that string is actually the different tones and timings to play instead of just playing a single tone. You can find a lot of those on the web. Then using lambda calls to turn on the LEDs and perform the effect I defined earlier, do that effect for a 10 seconds delay and turn off the LEDs.
+
+{% highlight yaml linenos %}
+output:
+  - platform: esp8266_pwm
+    pin: 14
+    id: rtttl_out
+
+rtttl:
+  output: rtttl_out
+  on_finished_playback:
+    - logger.log: 'Song ended.'
+    
+light:
+  - platform: neopixelbus
+    id: sos_light
+    type: GRB
+    variant: WS2812
+    pin: 5
+    num_leds: 8
+    name: "SOS Light"
+    internal: true
+    effects:
+      - strobe:
+          name: "Poopoo-Alert"
+          colors:
+            - state: true
+              brightness: 100%
+              red: 100%
+              green: 100%
+              blue: 0%
+              duration: 1000ms
+            - state: false
+              duration: 350ms
+            - state: true
+              brightness: 100%
+              red: 100%
+              green: 0%
+              blue: 0%
+              duration: 1000ms
+
+button:
+  - platform: template
+    id: button_warning
+    name: I need to go!
+    on_press:
+      - rtttl.play: "Looney:d=4,o=5,b=140:32p,c6,8f6,8e6,8d6,8c6,a.,8c6,8f6,8e6,8d6,8d#6,e.6,8e6,8e6,8c6,8d6,8c6,8e6,8c6,8d6,8a,8c6,8g,8a#,8a,8f"
+      - lambda:
+          auto call = id(sos_light).turn_on();
+          call.set_effect("Poopoo-Alert");
+          call.perform();
+      - delay: 10s
+      - lambda:
+          auto call = id(sos_light).turn_off();
+          call.perform();
+{% endhighlight %}
+
+There's also a great little feature in esphome called 'status_led', you can basically use any LED through a simple GPIO to have a visual indicator of the health of the system. Super simple to configure and voila!
+
+{% highlight yaml linenos %}
+light:
+  - platform: status_led
+    name: "Status LED"
+    pin:
+      number: 0
+      inverted: true
+    id: status_l
+    internal: true
+{% endhighlight %}
 
 I printed a small enclosure and power the device with a simple 5V wall adapter.
 
