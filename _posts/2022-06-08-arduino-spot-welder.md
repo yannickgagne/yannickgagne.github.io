@@ -17,9 +17,9 @@ In this first part, we will cover the wiring and code to control the timing of t
 
 ## **Parts**
 - [Arduino Nano](https://amzn.to/3eAUiVA) (any Arduino will do)
-- SSD1306 OLED display (I2C)
-- SSR Relay
-- Potentiometer
+- [SSD1306 OLED display (I2C)](https://amzn.to/3S1KZMc)
+- [SSR Relay](https://amzn.to/3MRU6hH)
+- [Potentiometer](https://amzn.to/3s4Surb)
 - Resistor
 - Button
 
