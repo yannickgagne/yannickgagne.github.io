@@ -20,7 +20,7 @@ In this simple tutorial I will show you how I transformed my normal bathroom doo
 
 ## **Pictures**
 
-![1st installation picture](/assets/img/blog/smart-toilet-install.jpg){: .mx-auto.d-block :}
+![1st installation picture](/assets/img/blog/smart-toilet-install.webp){: .mx-auto.d-block :}
 
 ## **Context**
 

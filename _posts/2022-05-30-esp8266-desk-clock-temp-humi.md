@@ -24,7 +24,7 @@ In this simple tutorial I will show you how I made a little desk clock based on 
 
 ## **Connections**
 
-![Fritzing](/assets/img/blog/esp32-desk-clock-fritzing.png){: .mx-auto.d-block :}
+![Fritzing](/assets/img/blog/esp32-desk-clock-fritzing.webp){: .mx-auto.d-block :}
 
 ![Real thing](/assets/img/blog/esp32-desk-clock-connections-thumb.jpg){: .mx-auto.d-block :}
 

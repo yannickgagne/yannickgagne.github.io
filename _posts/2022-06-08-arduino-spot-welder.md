@@ -6,7 +6,7 @@ gh-repo: yannickgagne/ArduinoSpotWelder
 tags: [arduino]
 comments: true
 thumbnail-img: /assets/img/blog/arduino-spot-welder-thumb.jpg
-cover-img: /assets/img/blog/arduino-spot-welder-header.png
+cover-img: /assets/img/blog/arduino-spot-welder-header.webp
 ---
 
 A lot of my projects can be battery powered so being able to make my own battery packs with 18650 cells is very handy. This project can be built for relatively cheap by using a microwave transformer and recycled power cables.
@@ -25,7 +25,7 @@ In this first part, we will cover the wiring and code to control the timing of t
 
 ## **Connections**
 
-![Fritzing](/assets/img/blog/arduino-spot-welder-fritzing.png){: .mx-auto.d-block :}
+![Fritzing](/assets/img/blog/arduino-spot-welder-fritzing.webp){: .mx-auto.d-block :}
 
 ## **Code**
 
