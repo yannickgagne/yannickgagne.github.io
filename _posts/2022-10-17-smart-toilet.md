@@ -12,10 +12,10 @@ In this simple tutorial I will show you how I transformed my normal bathroom doo
 
 ## **Parts**
 - [ESPHome framework](https://esphome.io/)
-- [ESP8266](https://amzn.to/3T9qgra) (I use an [Adafruit HUZZAH ESP8266](https://www.adafruit.com/product/2471))
-- [Active piezo buzzer](https://amzn.to/3S7Rb5k)
-- [Neopixel LED bar](https://amzn.to/3yLRCLY)
-- [Magnetic door sensor](https://amzn.to/3D4bRXD)
+- [ESP8266](https://amzn.to/42cUdui) (I use an [Adafruit HUZZAH ESP8266](https://www.adafruit.com/product/2471))
+- [Active piezo buzzer](https://amzn.to/428SGFD)
+- [Neopixel LED bar](https://amzn.to/3LhkctX)
+- [Magnetic door sensor](https://amzn.to/3neW9Um)
 - 3D printed enclosure (optional)
 
 ## **Pictures**

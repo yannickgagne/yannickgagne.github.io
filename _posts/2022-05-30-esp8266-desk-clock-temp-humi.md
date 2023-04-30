@@ -17,9 +17,9 @@ In this simple tutorial I will show you how I made a little desk clock based on 
 - Post temperature and humidity to a local MQTT server
 
 ## **Parts**
-- [ESP8266](https://amzn.to/3T9qgra) (I use an [Adafruit HUZZAH ESP8266](https://www.adafruit.com/product/2471))
-- [AHT20 sensor (I2C)](https://amzn.to/3eAR7NP)
-- [SSD1306 OLED display (I2C)](https://amzn.to/3S1KZMc)
+- [ESP8266](https://amzn.to/42cUdui) (I use an [Adafruit HUZZAH ESP8266](https://www.adafruit.com/product/2471))
+- [AHT20 sensor (I2C)](https://amzn.to/3LgfooJ)
+- [SSD1306 OLED display (I2C)](https://amzn.to/3VkPp3P)
 - 3D printed enclosure (optional)
 
 ## **Connections**
